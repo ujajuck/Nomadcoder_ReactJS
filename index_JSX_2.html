@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <div id="root"></div>
+    </body>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+        const root = document.getElementById("root");
+        const Title = () => (
+            <h3 id="title" onMouseEnter={() => console.log("mouse enter")}>
+                 hi 
+            </h3>
+        );
+        const Btn = () => (
+            <button 
+                style={{backgroundColor: "tomato"}} 
+                onClick={() => console.log("clicked")}
+            >
+                 click
+            </button>
+        );
+        
+        // bable 을 사용하여 위의 코드를 아래와 같이 번역해 준다.
+        // const span = React.createElement("span",
+        //     {
+        //         id:"my-span",
+        //         style: {color:"red"},
+        //         onMouseEnter: () => console.log("mouse enter"),
+        //     },
+        //     "Hello?"
+        // );
+        // const btn = React.createElement(
+        //     "button",
+        //     {
+        //     onClick: () => console.log("clicked"),
+        //     },
+        //     "click me"
+        // );
+        // const container = React.createElement("div",null,[title,btn]);
+        const Container = () => (
+            <div>
+                <Title /> 
+                <Btn />
+            </div>
+            );
+        //직접 만든 요소는 모두 대문자로 시작해야 한다. 아니면 html 요소로 인식함
+        ReactDOM.render(<Container/>,root);
+    </script>
+</html>

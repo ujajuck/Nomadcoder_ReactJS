@@ -1,0 +1,38 @@
+
+<html>
+    <body>
+        <div id="root"></div>
+    </body>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+        const root = document.getElementById("root");
+        function App () {
+            let [counter,setCounter] = React.useState(0);
+            const onClick = () => {
+                //setCounter(counter+1);
+                setCounter((counter)=>counter+1);
+                //current 는 항상 최신값을 보장한다.
+            };         
+            
+            return(
+                <div>
+                    <h3>TOTAL CLICKS: {counter}</h3>
+                    <button onClick={onClick}>Click me </button>
+                </div>
+            );
+        }
+            
+        ReactDOM.render(<App/>,root);
+    </script>
+</html>
+//state 의 강력함. 이전과 다르게 필요한 부분만 랜더링한다.
+
+/*
+삽질 기록
+서버를 안키고 실행해놓고 localhost:8080 실행 안된다고 삽질함
+폴더에서 그냥 실행하면 실행 된다 (당연하다;; html 이니까)
+아직 서버가 없으므로 visual code 에서 바로 실행 시키기 위해 open with live server 라이브러리를 설치함
+단축키는 Alt+L Alt+O 이다.
+*/
