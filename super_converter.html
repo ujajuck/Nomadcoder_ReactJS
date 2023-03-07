@@ -1,0 +1,121 @@
+
+<html>
+    <body>
+        <div id="root"></div>
+    </body>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+
+        function MinutesToHours () {
+            const [amount,setAmount] = React.useState(0);
+            const [flipped,setFlipped] = React.useState(false);
+            const onChange = (event) => {
+                setAmount(event.target.value);
+            };
+            const reset = () => setAmount(0);
+            const onFlip = () => {
+                reset()
+                setFlipped((current)=>!current);
+            }
+            return(
+                <div>
+                    <h3> Minutes To Hours </h3>
+                    <div>
+                        <lable htmlFor="minutes">Minutes</lable>
+                        <input 
+                            value={flipped ? amount*60 : amount} 
+                            id="minutes" 
+                            placeholder = "Minutes" 
+                            type = "number" 
+                            onChange={onChange}
+                            disabled = {flipped}
+                        />
+                    </div>
+                    <div>
+                        <lable htmlFor="hours">Hours</lable>
+                        <input 
+                            value={flipped ? amount : Math.round(amount/60)} 
+                            id="hours" 
+                            placeholder = "Hours" 
+                            type = "number"
+                            onChange={onChange}
+                            disabled = {!flipped}
+                        />
+                    </div>
+                    <button onClick={reset}>reset</button>
+                    <button onClick={onFlip}>flip</button>
+                </div>
+            );
+        }
+            
+        function DollarToWon () {
+            const [amount,setAmount]=React.useState(0)
+            const [flipped,setflipped]=React.useState(false)
+            const onchange = (event) =>{
+                setAmount((current)=>event.target.value);
+            }
+            const reset = () =>  {
+                setAmount(0);
+            }
+            const flip =() => {
+                reset();
+                setflipped((current)=>!current)
+            }
+            return(
+                <div>
+                    <h3> Dollar to Korean Won </h3>
+                    <div>
+                        <lable htmlFor="dollar"> USD </lable>
+                        <input 
+                            value = {!flipped ? amount : parseFloat(amount/1308.76,2).toFixed(2)}
+                            onChange = {onchange}
+                            id = "dollar"
+                            type="number"
+                            disabled={!flipped===false}
+                        />
+                    </div>
+                    <div>
+                        <lable htmlFor="won"> Won </lable>
+                        <input 
+                            value = {flipped ? amount : amount*1308.76}
+                            onChange = {onchange}
+                            id = "won"
+                            type="number"
+                            disabled={flipped===false}
+                        />
+                    </div>
+                    <button onClick={reset}>reset</button>
+                    <button onClick={flip}>flip</button>
+                </div>
+            )
+        }
+            
+        function App () {
+            const [index,setIndex] = React.useState("xx")
+            const onSelect = (event) => {
+                setIndex((current) => event.target.value)
+            }
+            return(
+                <div>
+                    <h1>Super Converter</h1>
+                    <select value = {index} onChange={onSelect}>
+                        <option value="xx"> Select </option> 
+                        <option value="0"> Minutes & Hours </option>   
+                        <option value="1"> Km & Miles </option>   
+                    </select>
+                    {index === "xx" ? <h3>Select what you want</h3> : null}
+                    {index === "0" ? <MinutesToHours/> : null}
+                    {index === "1" ? <DollarToWon/> : null}
+                </div>
+            )
+            
+        }
+        
+        const root = document.getElementById("root");
+        
+        ReactDOM.render(<App/>,root);
+        
+    </script>
+</html>
