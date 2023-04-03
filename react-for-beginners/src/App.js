@@ -1,8 +1,21 @@
-import Button from "./Button";
-import ToDoList from "./ToDoList";
-import styles from "./App.module.css"
+// import Button from "./Button";
+// import ToDoList from "./ToDoList";
+// import CoinTracker from "./CoinTracker";
+// import MovieApp from "./MovieApp";
+// import styles from "./App.module.css"
+import Home from "./routes/Home";
+import Detail from "./routes/Detail";
 
-import {useState,useEffect} from "react"
+import {
+  useState,
+  useEffect
+} from "react"
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link,
+}from "react-router-dom"
 
 function App() {
   const [counter,setValue]=useState(0);
@@ -19,18 +32,28 @@ function App() {
   },[keyword]);
   console.log("I refresh all time")
   return (
-    <div>
-        <h1 className={styles.title}>{counter}</h1>
-        <input 
-          value={keyword}
-          onChange={onChange}
-          type="text"
-          placeholder="????"
-        ></input>
-        <button onClick={onClick}>button</button>
-        {counter%2===1?<Button text={"my Button"}/>:null}
-        <ToDoList/>
-    </div>
+    
+
+    <Router>
+        <Routes>
+            <Route path="/" element={<Home/>}/>
+            <Route path="/movie/:id" element={<Detail/>}/>
+        </Routes>
+    </Router>
+    // <div>
+    //     <h1 className={styles.title}>{counter}</h1>
+    //     <input 
+    //       value={keyword}
+    //       onChange={onChange}
+    //       type="text"
+    //       placeholder="????"
+    //     ></input>
+    //     <button onClick={onClick}>button</button>
+    //     {counter%2===1?<Button text={"my Button"}/>:null}
+    //     <ToDoList/>
+    //     <CoinTracker/>
+    //     <MovieApp/>
+    // </div>
   );
 }
 
